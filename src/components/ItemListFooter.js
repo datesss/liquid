@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const TodoListFooter = (props) => (
+const ItemListFooter = (props) => (
   <p className='filter'>
     Show:
     {' '}
@@ -18,8 +18,8 @@ const TodoListFooter = (props) => (
   </p>
 )
 
-TodoListFooter.propTypes = {
+ItemListFooter.propTypes = {
   setFilter: PropTypes.func.isRequired,
 }
 
-export default TodoListFooter
+export default ItemListFooter

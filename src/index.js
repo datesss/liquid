@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
-import TodoApp from './components/TodoApp'
+import ItemApp from './components/ItemApp'
 
 import ApolloClient, { createNetworkInterface } from 'apollo-client'
 import { ApolloProvider } from 'react-apollo'
@@ -9,8 +9,8 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import './style.css'
 
 // Paste your endpoint for the Simple API here.
-// Info: https://github.com/graphcool-examples/react-apollo-todo-example#2-create-graphql-api-with-graphcool
-const networkInterface = createNetworkInterface({ uri: '__SIMPLE_API_ENDPOINT__' })
+// Info: https://github.com/graphcool-examples/react-apollo-item-example#2-create-graphql-api-with-graphcool
+const networkInterface = createNetworkInterface({ uri: 'https://api.graph.cool/simple/v1/cj2s2muxyedun0123ovrdrifn' })
 
 const client = new ApolloClient({
   networkInterface,
@@ -39,7 +39,7 @@ const store = createStore(
 
 render(
   <ApolloProvider store={store} client={client}>
-    <TodoApp />
+    <ItemApp />
   </ApolloProvider>,
   document.getElementById('root')
 )

@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react'
-import TodoTextInput from '../components/TodoTextInput'
+import ItemTextInput from '../components/ItemTextInput'
 import classnames from 'classnames'
 
-export default class Todo extends React.Component {
+export default class Item extends React.Component {
   static propTypes ={
-    todo: PropTypes.object.isRequired,
-    renameTodo: PropTypes.func.isRequired,
-    deleteTodo: PropTypes.func.isRequired,
-    toggleTodo: PropTypes.func.isRequired,
+    item: PropTypes.object.isRequired,
+    renameItem: PropTypes.func.isRequired,
+    deleteItem: PropTypes.func.isRequired,
+    toggleItem: PropTypes.func.isRequired,
     refetch: PropTypes.func.isRequired,
   }
 
@@ -16,14 +16,14 @@ export default class Todo extends React.Component {
   }
 
   _handleCompleteChange = (e) => {
-    const id = this.props.todo.id
+    const id = this.props.item.id
     var complete = e.target.checked
-    this.props.toggleTodo({variables: {id, complete}})
+    this.props.toggleItem({variables: {id, complete}})
       .then(this.props.refetch())
   }
 
   _handleDestroyClick = () => {
-    this._removeTodo()
+    this._removeItem()
   }
 
   _handleLabelDoubleClick = () => {
@@ -36,19 +36,19 @@ export default class Todo extends React.Component {
 
   _handleTextInputDelete = () => {
     this._setEditMode(false)
-    this._removeTodo()
+    this._removeItem()
   }
 
   _handleTextInputSave = (text) => {
     this._setEditMode(false)
-    const id = this.props.todo.id
-    this.props.renameTodo({variables: {id, text}})
+    const id = this.props.item.id
+    this.props.renameItem({variables: {id, text}})
       .then(this.props.refetch())
   }
 
-  _removeTodo () {
-    const id = this.props.todo.id
-    this.props.deleteTodo({variables: {id}})
+  _removeItem () {
+    const id = this.props.item.id
+    this.props.deleteItem({variables: {id}})
       .then(this.props.refetch())
   }
 
@@ -58,9 +58,9 @@ export default class Todo extends React.Component {
 
   renderTextInput () {
     return (
-      <TodoTextInput
+      <ItemTextInput
         className='edit'
-        initialValue={this.props.todo.text}
+        initialValue={this.props.item.text}
         onCancel={this._handleTextInputCancel}
         onDelete={this._handleTextInputDelete}
         onSave={this._handleTextInputSave}
@@ -72,18 +72,18 @@ export default class Todo extends React.Component {
     return (
       <li
         className={classnames({
-          completed: this.props.todo.complete,
+          completed: this.props.item.complete,
           editing: this.state.isEditing,
         })}>
         <div className='view'>
           <input
-            checked={this.props.todo.complete}
+            checked={this.props.item.complete}
             className='toggle'
             onChange={this._handleCompleteChange}
             type='checkbox'
           />
           <label onDoubleClick={this._handleLabelDoubleClick}>
-            {this.props.todo.text}
+            {this.props.item.text} {this.props.item.episode.shortTitle}
           </label>
           <button
             className='destroy'

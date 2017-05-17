@@ -1,0 +1,52 @@
+# projectId: cj2s2muxyedun0123ovrdrifn
+# version: 12
+type File implements Node {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String!
+  secret: String! @isUnique
+  size: Int!
+  updatedAt: DateTime!
+  url: String! @isUnique
+  videoFile: VideoFile @relation(name: "VideoFileOnFile")
+}
+
+type Seasons implements Node {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+  episodes: [Episode!]! @relation(name: "EpisodeOnSeasons")
+}
+
+type User implements Node {
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+}
+
+type Episode implements Node {
+  createdAt: DateTime!
+  entries: [Item!]! @relation(name: "EntryOnEpisode")
+  id: ID! @isUnique
+  seasons: Seasons @relation(name: "EpisodeOnSeasons")
+  updatedAt: DateTime!
+}
+
+type Item implements Node {
+  complete: Boolean!
+  createdAt: DateTime!
+  episode: Episode @relation(name: "EntryOnEpisode")
+  id: ID! @isUnique
+  text: String!
+  updatedAt: DateTime!
+  videoFiles: [VideoFile!]! @relation(name: "VideoFileOnEntry")
+}
+
+type VideoFile implements Node {
+  createdAt: DateTime!
+  entry: Item @relation(name: "VideoFileOnEntry")
+  file: File @relation(name: "VideoFileOnFile")
+  id: ID! @isUnique
+  updatedAt: DateTime!
+}

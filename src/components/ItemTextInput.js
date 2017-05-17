@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 const ENTER_KEY_CODE = 13
 const ESC_KEY_CODE = 27
 
-export default class TodoTextInput extends React.Component {
+export default class ItemTextInput extends React.Component {
   static propTypes = {
     className: PropTypes.string,
     initialValue: PropTypes.string,

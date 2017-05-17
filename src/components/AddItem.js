@@ -1,22 +1,22 @@
 import React, {PropTypes} from 'react'
-import TodoTextInput from '../components/TodoTextInput'
+import ItemTextInput from '../components/ItemTextInput'
 
-export default class AddTodo extends React.Component {
+export default class AddItem extends React.Component {
 
   static propTypes = {
-    addTodo: PropTypes.func.isRequired,
+    addItem: PropTypes.func.isRequired,
     refetch: PropTypes.func.isRequired,
   }
 
   _handleSave = (text) => {
-    this.props.addTodo({variables: {text}})
+    this.props.addItem({variables: {text}})
       .then(this.props.refetch())
   }
 
   render () {
     return (
-      <TodoTextInput
-        className='new-todo'
+      <ItemTextInput
+        className='new-item'
         onSave={this._handleSave}
         placeholder='Add...'
       />
